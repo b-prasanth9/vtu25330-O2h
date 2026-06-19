@@ -1,11 +1,11 @@
 .app {
   min-height: 100vh;
-  background: #f8f9fa;
+  background: linear-gradient(180deg, #f7f9fc 0%, #eef4ff 100%);
   color: #212529;
 }
 
 .dark-mode {
-  background: #121212;
+  background: linear-gradient(180deg, #0f1724 0%, #0b1220 100%);
   color: #f8f9fa;
 }
 
@@ -22,6 +22,60 @@
 
 .task-status {
   min-width: 100px;
+}
+
+.navbar-custom {
+  background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+}
+
+.navbar-custom .navbar-brand,
+.navbar-custom .nav-link,
+.navbar-custom .btn {
+  color: #fff !important;
+}
+
+.container {
+  max-width: 1100px;
+}
+
+.card-custom {
+  border: 0;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(39, 64, 139, 0.12);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.card-custom:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(39, 64, 139, 0.18);
+}
+
+.badge-status {
+  padding: 0.45rem 0.6rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+.badge-pending { background: #ffc107; color: #212529; }
+.badge-inprogress { background: #17a2b8; color: #fff; }
+.badge-completed { background: #28a745; color: #fff; }
+
+.task-actions .btn {
+  min-width: 92px;
+}
+
+.table-custom thead th {
+  border-bottom: 2px solid rgba(0,0,0,0.05);
+}
+
+/* Responsive: show cards on small screens, table on medium+ */
+.task-cards { display: none; }
+@media (max-width: 767.98px) {
+  .task-table { display: none; }
+  .task-cards { display: block; }
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 2rem;
 }
 
 .empty-state {

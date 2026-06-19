@@ -1,9 +1,17 @@
-const { getAllTasks, createTask, updateTaskStatus, deleteTask } = require('../models/taskModel');
+const { getAllTasks, createTask, updateTaskStatus, deleteTask, getStats } = require('../models/taskModel');
 
 const listTasks = async (req, res) => {
   try {
-    const tasks = await getAllTasks();
-    res.json(tasks);
+    const { search, page, limit, sort } = req.query;
+    const options = {
+      user: req.user ? req.user.id : undefined,
+      search,
+      page: page ? parseInt(page, 10) : 1,
+      limit: limit ? parseInt(limit, 10) : 20,
+      sort: sort || '-created_at'
+    };
+    const result = await getAllTasks(options);
+    res.json(result);
   } catch (error) {
     res.status(500).json({ error: 'Unable to load tasks' });
   }
@@ -25,7 +33,8 @@ const addTask = async (req, res) => {
   }
 
   try {
-    const task = await createTask({ title: title.trim(), description: description.trim(), status });
+    const userId = req.user ? req.user.id : undefined;
+    const task = await createTask({ user: userId, title: title.trim(), description: description.trim(), status });
     res.status(201).json(task);
   } catch (error) {
     res.status(500).json({ error: 'Unable to create task' });
@@ -58,9 +67,20 @@ const removeTask = async (req, res) => {
   }
 };
 
+const stats = async (req, res) => {
+  try {
+    const userId = req.user ? req.user.id : undefined;
+    const data = await getStats(userId);
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: 'Unable to compute stats' });
+  }
+};
+
 module.exports = {
   listTasks,
   addTask,
   completeTask,
-  removeTask
+  removeTask,
+  stats
 };
