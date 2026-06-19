@@ -1,0 +1,30 @@
+.app {
+  min-height: 100vh;
+  background: #f8f9fa;
+  color: #212529;
+}
+
+.dark-mode {
+  background: #121212;
+  color: #f8f9fa;
+}
+
+.dark-mode .navbar,
+.dark-mode .card,
+.dark-mode .table,
+.dark-mode .form-control,
+.dark-mode .btn,
+.dark-mode .alert {
+  background-color: #1e1e1e !important;
+  color: #f8f9fa !important;
+  border-color: #333 !important;
+}
+
+.task-status {
+  min-width: 100px;
+}
+
+.empty-state {
+  text-align: center;
+  margin-top: 2rem;
+}
